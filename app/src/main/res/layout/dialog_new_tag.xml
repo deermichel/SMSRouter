@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/dialog_new_tag_title"
+        android:textSize="25sp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_new_tag_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/accent_material_dark"
+        android:layout_below="@+id/dialog_new_tag_title" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:inputType="textNoSuggestions"
+        android:hint="@string/dialog_new_group_name"
+        android:id="@+id/dialog_new_tag_text_name"
+        android:layout_below="@+id/dialog_new_tag_title" />
+
+</RelativeLayout>
