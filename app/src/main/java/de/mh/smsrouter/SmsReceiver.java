@@ -1,6 +1,7 @@
 package de.mh.smsrouter;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -78,7 +79,10 @@ public class SmsReceiver extends BroadcastReceiver {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setSmallIcon(R.mipmap.ic_launcher);
             builder.setContentTitle(context.getText(R.string.app_name));
-            builder.setContentText("SMS von '" + from + "' an Tag '" + tag + "' (" + String.valueOf(numbers.size()) + ") weitergeleitet.");
+            builder.setContentText(context.getString(R.string.notification, from, tag, numbers.size()));
+            Intent showLog = new Intent(context, ViewLog.class);
+            PendingIntent resultIntent = PendingIntent.getActivity(context, 0, showLog, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(resultIntent);
 
             // show notification
             NotificationManager notifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -87,17 +91,20 @@ public class SmsReceiver extends BroadcastReceiver {
             prefs.edit().putInt("id", id + 1).apply();
 
             // log
-            Logger.log("SMS von '" + from + "' an Tag '" + tag + "' (" + String.valueOf(numbers.size()) + ") weitergeleitet.");
+            Logger.log(context.getString(R.string.notification, from, tag, numbers.size()));
 
         } catch (Exception e) {
             try {
-                Logger.log("Fehler: " + e.toString());
+                Logger.log(context.getText(R.string.error) + e.toString());
 
                 // create notification
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
                 builder.setSmallIcon(R.mipmap.ic_launcher);
                 builder.setContentTitle(context.getText(R.string.app_name));
-                builder.setContentText("Fehler: " + e.toString());
+                builder.setContentText(context.getText(R.string.error) + e.toString());
+                Intent showLog = new Intent(context, ViewLog.class);
+                PendingIntent resultIntent = PendingIntent.getActivity(context, 0, showLog, PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setContentIntent(resultIntent);
 
                 // show notification
                 NotificationManager notifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

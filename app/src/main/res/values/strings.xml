@@ -1,24 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SMS Router</string>
-    <string name="action_new">Neu</string>
-    <string name="action_add">Hinzufügen</string>
-    <string name="action_edit_groups">Gruppen verwalten</string>
-    <string name="action_view_log">Log anzeigen</string>
-    <string name="action_about">Über</string>
+    <string name="app_name" translatable="false">SMS Router</string>
+    <string name="action_new">New</string>
+    <string name="action_add">Add</string>
+    <string name="action_edit_groups">Manage Groups</string>
+    <string name="action_view_log">Show Log</string>
+    <string name="action_about">About</string>
     <string name="button_ok">OK</string>
-    <string name="button_cancel">Abbrechen</string>
-    <string name="dialog_new_group_title">Neue Gruppe</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="dialog_new_group_title">New Group</string>
     <string name="dialog_new_group_name">Name</string>
-    <string name="dialog_new_tag_title">Neuer Tag</string>
-    <string name="dialog_rename_title">Umbenennen</string>
-    <string name="dialog_rename_name">Neuer Name</string>
+    <string name="dialog_new_tag_title">New Tag</string>
+    <string name="dialog_rename_title">Rename</string>
+    <string name="dialog_rename_name">New Name</string>
     <string-array name="options_dialog">
-        <item>Umbenennen</item>
-        <item>Löschen</item>
+        <item>Rename</item>
+        <item>Delete</item>
     </string-array>
-    <string name="group_settings_note">Zum Löschen tippen und halten</string>
-    <string name="select_groups">Gruppen auswählen</string>
-    <string name="about">SMS Router 1.0 Build 1\n© 2015 Micha Hanselmann.\nDiese App wurde unter der MIT-Lizenz herausgegeben.</string>
+    <string name="group_settings_note">Tap and hold to delete</string>
+    <string name="select_groups">Select Groups</string>
+    <string name="about" translatable="false">SMS Router 1.0 Build 1\n© 2015 Micha Hanselmann\nThis app is released under the MIT license.</string>
+    <string name="notification">SMS from \'%1$s\' was forwarded to tag \'%2$s\' (%3$d)</string>
+    <string name="error">Error:&#160;</string>
 
 </resources>
