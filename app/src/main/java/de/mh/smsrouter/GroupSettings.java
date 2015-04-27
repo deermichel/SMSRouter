@@ -26,6 +26,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ev.contactsmultipicker.ContactPickerActivity;
+import com.ev.contactsmultipicker.ContactResult;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -76,7 +79,7 @@ public class GroupSettings extends ActionBarActivity implements AdapterView.OnIt
 
             // add number
             case R.id.action_add_number:
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                Intent intent = new Intent(this, ContactPickerActivity.class);
                 startActivityForResult(intent, PICK_CONTACT);
                 return true;
 
@@ -154,23 +157,25 @@ public class GroupSettings extends ActionBarActivity implements AdapterView.OnIt
 
         if (requestCode == PICK_CONTACT && resultCode == RESULT_OK) {
 
-            // get phone number
-            Uri contactUri = data.getData();
-            Cursor cursor = getContentResolver().query(contactUri, null, null, null, null);
-            cursor.moveToFirst();
-            int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-            String number = cursor.getString(column);
+            // selected contacts
+            ArrayList<ContactResult> contacts = (ArrayList<ContactResult>) data.getSerializableExtra(ContactPickerActivity.CONTACT_PICKER_RESULT);
+            for (ContactResult contact : contacts) {
+                for (ContactResult.ResultItem item : contact.getResults()) {
+                    String number = item.getResult();
 
-            // get stored numbers
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            Set<String> stored = prefs.getStringSet("group_" + getTitle().toString(), new HashSet<String>());
-            Set<String> numbers = new HashSet<>(stored);
+                    // get stored numbers
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                    Set<String> stored = prefs.getStringSet("group_" + getTitle().toString(), new HashSet<String>());
+                    Set<String> numbers = new HashSet<>(stored);
 
-            // add number
-            numbers.add(getContactName(number) + ";" + number);
+                    // add number
+                    numbers.add(getContactName(number) + ";" + number);
 
-            // save numbers
-            prefs.edit().putStringSet("group_" + getTitle().toString(), numbers).apply();
+                    // save numbers
+                    prefs.edit().putStringSet("group_" + getTitle().toString(), numbers).apply();
+
+                }
+            }
 
             onResume();
         }

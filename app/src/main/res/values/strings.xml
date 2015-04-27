@@ -20,7 +20,7 @@
     </string-array>
     <string name="group_settings_note">Tap and hold to delete</string>
     <string name="select_groups">Select Groups</string>
-    <string name="about" translatable="false">SMS Router 1.0 Build 1\n© 2015 Micha Hanselmann\nThis app is released under the MIT license.</string>
+    <string name="about" translatable="false">SMS Router 1.0 Build 3\n© 2015 Micha Hanselmann\nThis app is released under the MIT license.</string>
     <string name="notification">SMS from \'%1$s\' was forwarded to tag \'%2$s\' (%3$d)</string>
     <string name="error">Error:&#160;</string>
 
