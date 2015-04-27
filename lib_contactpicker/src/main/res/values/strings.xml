@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">ContactsMultiPicker</string>
+    <string name="contactImage">Contact Image</string>
+    <string name="contactName">Contact Name</string>
+    <string name="select">Select Contacts</string>
+
+</resources>
