@@ -47,6 +47,11 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // check enabled
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        menu.findItem(R.id.action_enabled).setChecked(prefs.getBoolean("enabled", true));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -63,6 +68,17 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
             // edit groups
             case R.id.action_edit_groups:
                 startActivity(new Intent(this, EditGroups.class));
+                return true;
+
+            // enabled
+            case R.id.action_enabled:
+                item.setChecked(!item.isChecked());
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                if (item.isChecked()) {
+                    prefs.edit().putBoolean("enabled", true).apply();
+                } else {
+                    prefs.edit().putBoolean("enabled", false).apply();
+                }
                 return true;
 
             // show log
@@ -151,20 +167,25 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
 
         // create options dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(R.array.options_dialog, new DialogInterface.OnClickListener() {
+        builder.setItems(R.array.tag_options_dialog, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 switch (which) {
 
-                    // rename
+                    // options
                     case 0:
+                        showOptionsDialog(listTags.getItemAtPosition(position).toString());
+                        break;
+
+                    // rename
+                    case 1:
                         showRenameDialog(listTags.getItemAtPosition(position).toString());
                         break;
 
                     // delete
-                    case 1:
+                    case 2:
 
                         // get stored tags
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Main.this);
@@ -308,6 +329,39 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onResume();
+            }
+        });
+
+        builder.show();
+    }
+
+    /** shows dialog for tag options */
+    private void showOptionsDialog(final String name) {
+
+        // get current settings
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!prefs.contains("setting_0_" + name)) prefs.edit().putBoolean("setting_0_" + name, true).apply();
+        boolean activated[] = new boolean[2];
+        for (int i = 0; i < activated.length; i++) {
+            activated[i] = prefs.getBoolean("setting_" + i + "_" + name, false);
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.options);
+        builder.setMultiChoiceItems(R.array.tag_options_options, activated, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                prefs.edit().putBoolean("setting_" + which + "_" + name, isChecked).apply();
+            }
+        });
+        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
             }
         });
 

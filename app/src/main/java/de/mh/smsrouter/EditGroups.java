@@ -141,7 +141,7 @@ public class EditGroups extends ActionBarActivity implements AdapterView.OnItemC
 
         // create options dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setItems(R.array.options_dialog, new DialogInterface.OnClickListener() {
+        builder.setItems(R.array.group_options_dialog, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -39,6 +39,10 @@
             android:label="@string/action_view_log" >
         </activity>
 
+        <activity
+            android:name=".ModerationDialog" >
+        </activity>
+
 
         <receiver
             android:name=".SmsReceiver" >

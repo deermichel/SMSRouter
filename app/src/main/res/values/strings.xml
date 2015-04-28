@@ -14,14 +14,26 @@
     <string name="dialog_new_tag_title">New Tag</string>
     <string name="dialog_rename_title">Rename</string>
     <string name="dialog_rename_name">New Name</string>
-    <string-array name="options_dialog">
+    <string-array name="tag_options_dialog">
+        <item>Options</item>
         <item>Rename</item>
         <item>Delete</item>
     </string-array>
+    <string-array name="group_options_dialog">
+        <item>Rename</item>
+        <item>Delete</item>
+    </string-array>
+    <string-array name="tag_options_options">
+        <item>Enabled</item>
+        <item>Moderate messages</item>
+    </string-array>
     <string name="group_settings_note">Tap and hold to delete</string>
     <string name="select_groups">Select Groups</string>
-    <string name="about" translatable="false">SMS Router 1.0 Build 3\n© 2015 Micha Hanselmann\nThis app is released under the MIT license.</string>
+    <string name="about" translatable="false">SMS Router 1.1 Build 4\n© 2015 Micha Hanselmann\nThis app is released under the MIT license.</string>
     <string name="notification">SMS from \'%1$s\' was forwarded to tag \'%2$s\' (%3$d)</string>
+    <string name="moderation">Forward SMS with content \'%4$s\' from \'%1$s\' to tag \'%2$s\' (%3$d)?</string>
     <string name="error">Error:&#160;</string>
+    <string name="enabled">Enabled</string>
+    <string name="options">Options</string>
 
 </resources>

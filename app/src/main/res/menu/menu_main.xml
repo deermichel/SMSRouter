@@ -12,6 +12,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     android:title="@string/action_edit_groups"
     app:showAsAction="ifRoom|withText" />
 
+<item android:id="@+id/action_enabled"
+    android:title="@string/enabled"
+    android:checkable="true"
+    app:showAsAction="never" />
+
 <item android:id="@+id/action_view_log"
     android:title="@string/action_view_log"
     app:showAsAction="never" />
