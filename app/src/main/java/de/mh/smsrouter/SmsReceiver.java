@@ -145,50 +145,5 @@ public class SmsReceiver extends BroadcastReceiver {
         context.startActivity(intent);
 
     }
-/*
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(R.string.app_name);
-        builder.setMessage(R.string.moderation);
-        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-                // send sms
-                SmsManager smsManager = SmsManager.getDefault();
-                for (String number : numbers)
-                    smsManager.sendTextMessage(number.split(";")[1], null, text, null, null);
-
-                // create notification
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-                builder.setSmallIcon(R.mipmap.ic_launcher);
-                builder.setContentTitle(context.getText(R.string.app_name));
-                builder.setContentText(context.getString(R.string.notification, from, tag, numbers.size()));
-                Intent showLog = new Intent(context, ViewLog.class);
-                PendingIntent resultIntent = PendingIntent.getActivity(context, 0, showLog, PendingIntent.FLAG_UPDATE_CURRENT);
-                builder.setContentIntent(resultIntent);
-
-                // show notification
-                NotificationManager notifyMgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                int id = prefs.getInt("id", 0);
-                notifyMgr.notify(id, builder.build());
-                prefs.edit().putInt("id", id + 1).apply();
-
-                // log
-                try {
-                    Logger.log(context.getString(R.string.notification, from, tag, numbers.size()));
-                } catch (IOException e) {
-                }
-
-            }
-        });
-        builder.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        builder.show();
-    }
-*/
 }
