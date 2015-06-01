@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class Main extends ActionBarActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class Main extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
     // gui objects
     private ListView listTags;
@@ -40,7 +40,6 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
 
         // setup groups list
         listTags.setOnItemClickListener(this);
-        listTags.setOnItemLongClickListener(this);
 
     }
 
@@ -155,15 +154,7 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        // open tag settings
-        showTagSettingsDialog(listTags.getItemAtPosition(position).toString());
-
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         // create options dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -174,18 +165,23 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
 
                 switch (which) {
 
-                    // options
+                    // tag settings
                     case 0:
+                        showTagSettingsDialog(listTags.getItemAtPosition(position).toString());
+                        break;
+
+                    // options
+                    case 1:
                         showOptionsDialog(listTags.getItemAtPosition(position).toString());
                         break;
 
                     // rename
-                    case 1:
+                    case 2:
                         showRenameDialog(listTags.getItemAtPosition(position).toString());
                         break;
 
                     // delete
-                    case 2:
+                    case 3:
 
                         // get stored tags
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Main.this);
@@ -211,7 +207,6 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
         });
         builder.show();
 
-        return false;
     }
 
     @Override

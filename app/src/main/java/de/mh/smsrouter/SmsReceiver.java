@@ -53,15 +53,15 @@ public class SmsReceiver extends BroadcastReceiver {
             from = from.substring(0, from.length() - 2);
 
             // check if message contains tag
-            if (!message.startsWith("(@")) return;
+            if (!message.trim().startsWith("@")) return;
 
             // get stored tags
             Set<String> tags = prefs.getStringSet("tags", new HashSet<String>());
 
             // parse tag
             String tag = "";
-            for (int i = 2; i < message.length(); i++) {
-                if (message.charAt(i) == ')') break;
+            for (int i = 1; i < message.length(); i++) {
+                if (message.charAt(i) == ':') break;
                 tag += message.charAt(i);
             }
 

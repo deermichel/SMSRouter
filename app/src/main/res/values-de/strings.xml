@@ -14,6 +14,7 @@
     <string name="dialog_rename_title">Umbenennen</string>
     <string name="dialog_rename_name">Neuer Name</string>
     <string-array name="tag_options_dialog">
+        <item>Gruppen auswählen</item>
         <item>Optionen</item>
         <item>Umbenennen</item>
         <item>Löschen</item>
