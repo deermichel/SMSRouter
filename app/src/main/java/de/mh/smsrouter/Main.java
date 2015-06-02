@@ -80,6 +80,11 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
                 }
                 return true;
 
+            // edit syntax
+            case R.id.action_edit_syntax:
+                showEditSyntaxDialog();
+                return true;
+
             // show log
             case R.id.action_view_log:
                 startActivity(new Intent(this, ViewLog.class));
@@ -361,6 +366,38 @@ public class Main extends ActionBarActivity implements AdapterView.OnItemClickLi
         });
 
         builder.show();
+    }
+
+    /** shows dialog for edit syntax */
+    private void showEditSyntaxDialog() {
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_edit_syntax, null);
+        ((EditText) dialogView.findViewById(R.id.dialog_edit_syntax_text_syntax)).setText(prefs.getString("syntax", ""));
+        builder.setView(dialogView);
+        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // check input
+                if (((EditText) dialogView.findViewById(R.id.dialog_edit_syntax_text_syntax)).getText().toString().equals("")) {
+                    if (prefs.contains("syntax")) prefs.edit().remove("syntax").apply();
+                } else {
+                    prefs.edit().putString("syntax", ((EditText) dialogView.findViewById(R.id.dialog_edit_syntax_text_syntax)).getText().toString()).apply();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
+
     }
 
 }

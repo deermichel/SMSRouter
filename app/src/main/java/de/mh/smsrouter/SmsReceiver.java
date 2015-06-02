@@ -52,21 +52,24 @@ public class SmsReceiver extends BroadcastReceiver {
             }
             from = from.substring(0, from.length() - 2);
 
+            // get tag syntax
+            String syntax[] = prefs.getString("syntax", context.getText(R.string.standard_syntax).toString()).split("\\[tag\\]");
+
             // check if message contains tag
-            if (!message.trim().startsWith("@")) return;
+            if (!message.trim().startsWith(syntax[0])) return;
 
             // get stored tags
             Set<String> tags = prefs.getStringSet("tags", new HashSet<String>());
 
             // parse tag
             String tag = "";
-            for (int i = 1; i < message.length(); i++) {
-                if (message.charAt(i) == ':') break;
+            for (int i = syntax[0].length(); i < message.length(); i++) {
+                if (message.substring(i, i + syntax[1].length()).equals(syntax[1])) break;
                 tag += message.charAt(i);
             }
 
             // parse text
-            String text = message.substring(tag.length() + 3);
+            String text = message.substring(syntax[0].length() + tag.length() + syntax[1].length());
 
             // check if tag exists
             if (!tags.contains(tag)) throw new Exception("Unknown tag: " + tag);

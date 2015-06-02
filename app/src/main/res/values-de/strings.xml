@@ -4,6 +4,7 @@
     <string name="action_new">Neu</string>
     <string name="action_add">Hinzufügen</string>
     <string name="action_edit_groups">Gruppen verwalten</string>
+    <string name="action_edit_syntax">Syntax bearbeiten</string>
     <string name="action_view_log">Log anzeigen</string>
     <string name="action_about">Über</string>
     <string name="button_ok">OK</string>

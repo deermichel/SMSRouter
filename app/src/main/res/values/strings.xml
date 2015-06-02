@@ -5,6 +5,7 @@
     <string name="action_new">New</string>
     <string name="action_add">Add</string>
     <string name="action_edit_groups">Manage Groups</string>
+    <string name="action_edit_syntax">Edit Syntax</string>
     <string name="action_view_log">Show Log</string>
     <string name="action_about">About</string>
     <string name="button_ok">OK</string>
@@ -14,6 +15,7 @@
     <string name="dialog_new_tag_title">New Tag</string>
     <string name="dialog_rename_title">Rename</string>
     <string name="dialog_rename_name">New Name</string>
+    <string name="standard_syntax" translatable="false">\@[tag]:</string>
     <string-array name="tag_options_dialog">
         <item>Select Groups</item>
         <item>Options</item>
