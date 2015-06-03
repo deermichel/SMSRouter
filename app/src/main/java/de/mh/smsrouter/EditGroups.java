@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class EditGroups extends ActionBarActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class EditGroups extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
     // gui objects
     private ListView listGroups;
@@ -43,7 +43,6 @@ public class EditGroups extends ActionBarActivity implements AdapterView.OnItemC
 
         // setup groups list
         listGroups.setOnItemClickListener(this);
-        listGroups.setOnItemLongClickListener(this);
 
     }
 
@@ -127,17 +126,7 @@ public class EditGroups extends ActionBarActivity implements AdapterView.OnItemC
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        // open group settings
-        Intent intent = new Intent(this, GroupSettings.class);
-        intent.putExtra("name", listGroups.getItemAtPosition(position).toString());
-        startActivity(intent);
-
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
         // create options dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -148,13 +137,20 @@ public class EditGroups extends ActionBarActivity implements AdapterView.OnItemC
 
                 switch (which) {
 
-                    // rename
+                    // open group settings
                     case 0:
+                        Intent intent = new Intent(EditGroups.this, GroupSettings.class);
+                        intent.putExtra("name", listGroups.getItemAtPosition(position).toString());
+                        startActivity(intent);
+                        break;
+
+                    // rename
+                    case 1:
                         showRenameDialog(listGroups.getItemAtPosition(position).toString());
                         break;
 
                     // delete
-                    case 1:
+                    case 2:
 
                         // get stored groups
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(EditGroups.this);
@@ -180,7 +176,6 @@ public class EditGroups extends ActionBarActivity implements AdapterView.OnItemC
         });
         builder.show();
 
-        return false;
     }
 
     @Override

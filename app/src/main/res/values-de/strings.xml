@@ -21,6 +21,7 @@
         <item>Löschen</item>
     </string-array>
     <string-array name="group_options_dialog">
+        <item>Bearbeiten</item>
         <item>Umbenennen</item>
         <item>Löschen</item>
     </string-array>
